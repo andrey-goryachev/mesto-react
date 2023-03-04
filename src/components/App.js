@@ -1,39 +1,13 @@
-import logoPath from './images/logo.svg'
+import logoPath from '../images/logo.svg'
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
 function App() {
   return (
     <div className="page__container">
-      <header className="header">
-        <img className="header__logo" src={logoPath} alt="Логотип Место Россия"/>
-      </header>
-      <main className="content">
-        <section className="profile">
-          <div className="profile__avatar-wrapper">
-            <img src="#" alt="Фото профиля" className="profile__avatar"/>
-          </div>
-          <div className="profile__info">
-            <div className="profile__wrapper-title">
-              <h1 className="profile__title"></h1>
-              <button className="
-          profile__button
-          profile__button_function_edit
-          button
-          button_opacity_medium" type="button" aria-label="Редактировать"></button>
-            </div>
-            <p className="profile__text"></p>
-          </div>
-          <button className="
-        profile__button
-        profile__button_function_add
-        button
-        button_opacity_medium" type="button" aria-label="Добавить место"></button>
-        </section>
-        <section className="elements">
-          <ul className="elements__list"></ul>
-        </section>
-      </main>
-      <footer className="footer">
-        <p className="footer__text">© 2022 Mesto Russia</p>
-      </footer>
+      <Header logoPath={logoPath}/>
+      <Main />
+      <Footer />
       <div className="popup popup_content_profile">
         <div className="popup__container">
           <button className="popup__cross button button_opacity_medium" type="button"></button>
@@ -103,7 +77,7 @@ function App() {
       <div className="popup popup_content_photo">
         <div className="popup__container popup__container_content_photo">
           <button className="popup__cross button button_opacity_medium" type="button"></button>
-          <img src="#" alt="" className="popup__photo"/>
+          <img src="src#" alt="" className="popup__photo"/>
           <p className="popup__description"></p>
         </div>
       </div>
@@ -140,7 +114,7 @@ function App() {
       </div>
       <template id="elements__card">
         <li className="elements__card">
-          <img src="#" alt="" className="elements__photo"/>
+          <img src="src#" alt="" className="elements__photo"/>
           <h3 className="elements__title"></h3>
           <div className="elements__like-info">
             <button className="elements__like button button_opacity_high" type="button"></button>
