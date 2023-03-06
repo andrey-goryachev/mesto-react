@@ -48,7 +48,9 @@ function App() {
         title="Редактировать профиль"
         name="profile"
         isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}>
+        onClose={closeAllPopups}
+        buttonText="Сохранить"
+      >
         <input
           className="popup__input popup__input_content_name"
           id="profile-name"
@@ -83,7 +85,9 @@ function App() {
         title="Новое место"
         name="card"
         isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}>
+        onClose={closeAllPopups}
+        buttonText="Создать"
+      >
         <input
           className="popup__input popup__input_content_place"
           id="card-place"
@@ -114,7 +118,9 @@ function App() {
         title="Обновить аватар"
         name="avatar"
         isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}>
+        onClose={closeAllPopups}
+        buttonText="Сохранить"
+      >
         <input
           className="popup__input popup__input_content_avatar"
           id="profile-avatar"
@@ -129,7 +135,7 @@ function App() {
         <span className="popup__error profile-avatar-error"></span>
       </PopupWithForm>
 
-      <PopupWithForm title="Вы уверены?" name="delete-card"/>
+      <PopupWithForm title="Вы уверены?" name="delete-card" buttonText="Да"/>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </div>
