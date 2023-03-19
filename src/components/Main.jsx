@@ -1,22 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {api} from "../utils/Api";
 import Card from "./Card";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Main(props) {
-  const [userName, setUserName] = useState('Жак Ив Кусто')
-  const [userDescription, setUserDescription] = useState('исследователь океана')
-  const [userAvatar, setUserAvatar] = useState('')
+  // const [userName, setUserName] = useState('Жак Ив Кусто')
+  // const [userDescription, setUserDescription] = useState('исследователь океана')
+  // const [userAvatar, setUserAvatar] = useState('')
   const [cards, setCards] = useState([])
+  const user = useContext(CurrentUserContext)
 
-  useEffect(() => {
-    api.getProfile()
-      .then(profile => {
-        setUserName(profile.name)
-        setUserDescription(profile.about)
-        setUserAvatar(profile.avatar)
-      })
-      .catch(err => {console.log(err)})
-  }, [])
+  // useEffect(() => {
+  //   api.getProfile()
+  //     .then(profile => {
+  //       setUserName(profile.name)
+  //       setUserDescription(profile.about)
+  //       setUserAvatar(profile.avatar)
+  //     })
+  //     .catch(err => {console.log(err)})
+  // }, [])
 
   useEffect(() => {
     api.getInitialCards()
@@ -28,11 +30,11 @@ function Main(props) {
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-wrapper" onClick={props.onEditAvatar}>
-          <img src={userAvatar} alt="Фото профиля" className="profile__avatar"/>
+          <img src={user.avatar} alt="Фото профиля" className="profile__avatar"/>
         </div>
         <div className="profile__info">
           <div className="profile__wrapper-title">
-            <h1 className="profile__title">{userName}</h1>
+            <h1 className="profile__title">{user.name}</h1>
             <button
               onClick={props.onEditProfile}
               className="
@@ -43,7 +45,7 @@ function Main(props) {
               type="button"
               aria-label="Редактировать"></button>
           </div>
-          <p className="profile__text">{userDescription}</p>
+          <p className="profile__text">{user.about}</p>
         </div>
         <button
           onClick={props.onAddPlace}
