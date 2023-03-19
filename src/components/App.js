@@ -7,6 +7,7 @@ import ImagePopup from "./ImagePopup";
 import {useEffect, useState} from "react";
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -54,6 +55,12 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  const handleUpdateUser = (user) => {
+    api.setProfile(user)
+      .then(user => setCurrentUser(user))
+      .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     api.getProfile()
       .then(profile => {
@@ -91,42 +98,11 @@ function App() {
 
         <Footer/>
 
-        <PopupWithForm
-          title="Редактировать профиль"
-          name="profile"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <input
-            className="popup__input popup__input_content_name"
-            id="profile-name"
-            name="name"
-            type="text"
-            // value=""
-            defaultValue=""
-            placeholder="Имя"
-            aria-label="Заполнить имя"
-            minLength="2"
-            maxLength="40"
-            required
-          />
-          <span className="popup__error profile-name-error"></span>
-          <input
-            className="popup__input popup__input_content_description"
-            id="profile-description"
-            name="about"
-            type="text"
-            // value=""
-            defaultValue=""
-            placeholder="О себе"
-            aria-label="Заполнить описание"
-            minLength="2"
-            maxLength="200"
-            required
-          />
-          <span className="popup__error profile-description-error"></span>
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         <PopupWithForm
           title="Новое место"
