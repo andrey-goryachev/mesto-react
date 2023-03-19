@@ -58,19 +58,33 @@ class Api {
     return this._requestServer(this._urlAddCard, 'POST', cardObject);
   }
 
-  deleteCard(deleteElement) {
-    this._urlDeleteCard = `${this._urlBase}/cards/${deleteElement.id}`;
+  // deleteCard(deleteElement) {
+  //   this._urlDeleteCard = `${this._urlBase}/cards/${deleteElement.id}`;
+  //   return this._requestServer(this._urlDeleteCard, 'DELETE');
+  // }
+
+  deleteCard(cardId) {
+    this._urlDeleteCard = `${this._urlBase}/cards/${cardId}`;
     return this._requestServer(this._urlDeleteCard, 'DELETE');
   }
 
-  addLike(cardId) {
-    this._urlLike = `${this._urlBase}/cards/${cardId}/likes`;
-    return this._requestServer(this._urlLike, 'PUT');
-  }
+  // addLike(cardId) {
+  //   this._urlLike = `${this._urlBase}/cards/${cardId}/likes`;
+  //   return this._requestServer(this._urlLike, 'PUT');
+  // }
+  //
+  // removeLike(cardId) {
+  //   this._urlLike = `${this._urlBase}/cards/${cardId}/likes`;
+  //   return this._requestServer(this._urlLike, 'DELETE');
+  // }
 
-  removeLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     this._urlLike = `${this._urlBase}/cards/${cardId}/likes`;
-    return this._requestServer(this._urlLike, 'DELETE');
+    if (isLiked) {
+      return this._requestServer(this._urlLike, 'DELETE');
+    } else {
+      return this._requestServer(this._urlLike, 'PUT');
+    }
   }
 
   updateAvatar(avatarLink) {

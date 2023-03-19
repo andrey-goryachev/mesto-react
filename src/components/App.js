@@ -14,6 +14,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState({})
   const [currentUser, setCurrentUser] = useState({})
+  const [cards, setCards] = useState([])
+
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
   }
@@ -33,10 +35,39 @@ function App() {
     setSelectedCard({})
   }
 
+  const handleCardLike = (card) => {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    api.changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch(err => {console.log(err)});
+  }
+
+  const handleCardDelete = (card) => {
+    api.deleteCard(card._id)
+      .then((res) => {
+        if (res.message === 'Пост удалён') {
+          setCards(cards.filter(c => c._id !== card._id))
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     api.getProfile()
       .then(profile => {
         setCurrentUser(profile)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+    api.getInitialCards()
+      .then(cards => {
+        setCards(cards)
       })
       .catch(err => {
         console.log(err)
@@ -53,6 +84,9 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+          cards={cards}
         />
 
         <Footer/>
