@@ -1,34 +1,9 @@
-import React, {
-  useContext,
-  // useEffect,
-  // useState
-} from 'react';
-// import {api} from "../utils/Api";
+import React, {useContext} from 'react';
 import Card from "./Card";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Main(props) {
-  // const [userName, setUserName] = useState('Жак Ив Кусто')
-  // const [userDescription, setUserDescription] = useState('исследователь океана')
-  // const [userAvatar, setUserAvatar] = useState('')
-  // const [cards, setCards] = useState([])
   const currenUser = useContext(CurrentUserContext)
-
-  // useEffect(() => {
-  //   api.getProfile()
-  //     .then(profile => {
-  //       setUserName(profile.name)
-  //       setUserDescription(profile.about)
-  //       setUserAvatar(profile.avatar)
-  //     })
-  //     .catch(err => {console.log(err)})
-  // }, [])
-
-  // useEffect(() => {
-  //   api.getInitialCards()
-  //     .then(cards => {props.setCards(cards)})
-  //     .catch(err => {console.log(err)})
-  // }, [])
 
   return (
     <main className="content">

@@ -42,7 +42,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         name="name"
         type="text"
         value={name ?? ''}
-        // defaultValue = {name}
         onChange={handleName}
         placeholder="Имя"
         aria-label="Заполнить имя"
@@ -57,7 +56,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         name="about"
         type="text"
         value={description ?? ''}
-        // defaultValue = {description}
         onChange={handleDescription}
         placeholder="О себе"
         aria-label="Заполнить описание"

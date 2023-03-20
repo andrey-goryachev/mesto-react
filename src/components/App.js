@@ -37,7 +37,6 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setSelectedCard({})
   }
-
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked)
@@ -46,7 +45,6 @@ function App() {
       })
       .catch(err => {console.log(err)});
   }
-
   const handleCardDelete = (card) => {
     api.deleteCard(card._id)
       .then((res) => {
@@ -56,19 +54,16 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
-
   const handleUpdateUser = (user) => {
     api.setProfile(user)
       .then(user => setCurrentUser(user))
       .catch((err) => console.log(err));
   }
-
   const handleUpdateAvatar = (link) => {
     api.updateAvatar(link)
       .then(user => setCurrentUser({...currentUser, avatar: user.avatar}))
       .catch((err) => console.log(err));
   }
-
   const handleAddPlaceSubmit = (card) => {
     api.addCard(card)
       .then(newCard => setCards([newCard, ...cards]))
@@ -129,41 +124,6 @@ function App() {
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />
-
-        {/*<PopupWithForm*/}
-        {/*  title="Новое место"*/}
-        {/*  name="card"*/}
-        {/*  isOpen={isAddPlacePopupOpen}*/}
-        {/*  onClose={closeAllPopups}*/}
-        {/*  buttonText="Создать"*/}
-        {/*>*/}
-        {/*  <input*/}
-        {/*    className="popup__input popup__input_content_place"*/}
-        {/*    id="card-place"*/}
-        {/*    name="place"*/}
-        {/*    type="text"*/}
-        {/*    // value=""*/}
-        {/*    defaultValue=""*/}
-        {/*    placeholder="Название"*/}
-        {/*    minLength="2"*/}
-        {/*    maxLength="30"*/}
-        {/*    required*/}
-        {/*  />*/}
-        {/*  <span className="popup__error card-place-error"></span>*/}
-        {/*  <input*/}
-        {/*    className="popup__input popup__input_content_link"*/}
-        {/*    id="image"*/}
-        {/*    name="image"*/}
-        {/*    type="url"*/}
-        {/*    // value=""*/}
-        {/*    defaultValue=""*/}
-        {/*    placeholder="Ссылка на картинку"*/}
-        {/*    required*/}
-        {/*  />*/}
-        {/*  <span className="popup__error image-error"></span>*/}
-        {/*</PopupWithForm>*/}
-
-
 
         <PopupWithForm title="Вы уверены?" name="delete-card" buttonText="Да"/>
 
