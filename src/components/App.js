@@ -9,6 +9,7 @@ import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -64,8 +65,13 @@ function App() {
 
   const handleUpdateAvatar = (link) => {
     api.updateAvatar(link)
-      .then(user => setCurrentUser(user))
       .then(user => setCurrentUser({...currentUser, avatar: user.avatar}))
+      .catch((err) => console.log(err));
+  }
+
+  const handleAddPlaceSubmit = (card) => {
+    api.addCard(card)
+      .then(newCard => setCards([newCard, ...cards]))
       .catch((err) => console.log(err));
   }
 
@@ -118,38 +124,44 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        <PopupWithForm
-          title="Новое место"
-          name="card"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-          buttonText="Создать"
-        >
-          <input
-            className="popup__input popup__input_content_place"
-            id="card-place"
-            name="place"
-            type="text"
-            // value=""
-            defaultValue=""
-            placeholder="Название"
-            minLength="2"
-            maxLength="30"
-            required
-          />
-          <span className="popup__error card-place-error"></span>
-          <input
-            className="popup__input popup__input_content_link"
-            id="image"
-            name="image"
-            type="url"
-            // value=""
-            defaultValue=""
-            placeholder="Ссылка на картинку"
-            required
-          />
-          <span className="popup__error image-error"></span>
-        </PopupWithForm>
+          onAddPlace={handleAddPlaceSubmit}
+        />
+
+        {/*<PopupWithForm*/}
+        {/*  title="Новое место"*/}
+        {/*  name="card"*/}
+        {/*  isOpen={isAddPlacePopupOpen}*/}
+        {/*  onClose={closeAllPopups}*/}
+        {/*  buttonText="Создать"*/}
+        {/*>*/}
+        {/*  <input*/}
+        {/*    className="popup__input popup__input_content_place"*/}
+        {/*    id="card-place"*/}
+        {/*    name="place"*/}
+        {/*    type="text"*/}
+        {/*    // value=""*/}
+        {/*    defaultValue=""*/}
+        {/*    placeholder="Название"*/}
+        {/*    minLength="2"*/}
+        {/*    maxLength="30"*/}
+        {/*    required*/}
+        {/*  />*/}
+        {/*  <span className="popup__error card-place-error"></span>*/}
+        {/*  <input*/}
+        {/*    className="popup__input popup__input_content_link"*/}
+        {/*    id="image"*/}
+        {/*    name="image"*/}
+        {/*    type="url"*/}
+        {/*    // value=""*/}
+        {/*    defaultValue=""*/}
+        {/*    placeholder="Ссылка на картинку"*/}
+        {/*    required*/}
+        {/*  />*/}
+        {/*  <span className="popup__error image-error"></span>*/}
+        {/*</PopupWithForm>*/}
 
 
 
