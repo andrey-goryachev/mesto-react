@@ -8,7 +8,6 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateAvatar(inputAvatar.current.value);
-    onClose()
   };
 
   return (

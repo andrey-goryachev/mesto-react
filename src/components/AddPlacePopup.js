@@ -5,13 +5,13 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const [name, setName] = useState('')
   const [link, setLink] = useState('')
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
     onAddPlace({
       name,
       link
     })
-    onClose()
   }
 
   return (

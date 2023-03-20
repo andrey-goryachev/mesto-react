@@ -56,17 +56,26 @@ function App() {
   }
   const handleUpdateUser = (user) => {
     api.setProfile(user)
-      .then(user => setCurrentUser(user))
+      .then((user) => {
+        setCurrentUser(user)
+        closeAllPopups()
+      })
       .catch((err) => console.log(err));
   }
   const handleUpdateAvatar = (link) => {
     api.updateAvatar(link)
-      .then(user => setCurrentUser({...currentUser, avatar: user.avatar}))
+      .then((user) => {
+        setCurrentUser({...currentUser, avatar: user.avatar})
+        closeAllPopups()
+      })
       .catch((err) => console.log(err));
   }
   const handleAddPlaceSubmit = (card) => {
     api.addCard(card)
-      .then(newCard => setCards([newCard, ...cards]))
+      .then((newCard) => {
+        setCards([newCard, ...cards])
+        closeAllPopups()
+      })
       .catch((err) => console.log(err));
   }
 
