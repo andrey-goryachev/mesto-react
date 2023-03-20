@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -61,6 +62,13 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  const handleUpdateAvatar = (link) => {
+    api.updateAvatar(link)
+      .then(user => setCurrentUser(user))
+      .then(user => setCurrentUser({...currentUser, avatar: user.avatar}))
+      .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     api.getProfile()
       .then(profile => {
@@ -104,6 +112,12 @@ function App() {
           onUpdateUser={handleUpdateUser}
         />
 
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+
         <PopupWithForm
           title="Новое место"
           name="card"
@@ -137,26 +151,7 @@ function App() {
           <span className="popup__error image-error"></span>
         </PopupWithForm>
 
-        <PopupWithForm
-          title="Обновить аватар"
-          name="avatar"
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <input
-            className="popup__input popup__input_content_avatar"
-            id="profile-avatar"
-            name="avatar"
-            type="url"
-            // value=""
-            defaultValue=""
-            placeholder="Ссылка на аватар"
-            aria-label="Заполнить ссылку на аватар"
-            required
-          />
-          <span className="popup__error profile-avatar-error"></span>
-        </PopupWithForm>
+
 
         <PopupWithForm title="Вы уверены?" name="delete-card" buttonText="Да"/>
 

@@ -3,9 +3,10 @@ import PopupWithForm from "./PopupWithForm";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
+  const currentUser = useContext(CurrentUserContext)
+
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
-  const currentUser = useContext(CurrentUserContext)
 
   useEffect(() => {
     setName(currentUser.name)
@@ -37,11 +38,12 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     >
       <input
         className="popup__input popup__input_content_name"
-        onChange={handleName}
         id="profile-name"
         name="name"
         type="text"
-        value={name}
+        value={name ?? ''}
+        // defaultValue = {name}
+        onChange={handleName}
         placeholder="Имя"
         aria-label="Заполнить имя"
         minLength="2"
@@ -51,11 +53,12 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       <span className="popup__error profile-name-error"></span>
       <input
         className="popup__input popup__input_content_description"
-        onChange={handleDescription}
         id="profile-description"
         name="about"
         type="text"
-        value={description}
+        value={description ?? ''}
+        // defaultValue = {description}
+        onChange={handleDescription}
         placeholder="О себе"
         aria-label="Заполнить описание"
         minLength="2"
