@@ -1,9 +1,12 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   const inputAvatar = useRef()
-  const [value, setValue] = useState('')
+
+  useEffect( () => {
+    inputAvatar.current.value = ''
+  }, [isOpen])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,9 +28,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
         id="profile-avatar"
         name="avatar"
         type="url"
-        value={value}
-        onChange={(e) => {setValue(e.target.value)}}
-        // defaultValue=""
+        defaultValue=""
         placeholder="Ссылка на аватар"
         aria-label="Заполнить ссылку на аватар"
         required
