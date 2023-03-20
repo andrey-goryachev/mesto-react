@@ -45,11 +45,14 @@ function App() {
       })
       .catch(err => {console.log(err)});
   }
+
   const handleCardDelete = (card) => {
     api.deleteCard(card._id)
       .then((res) => {
         if (res.message === 'Пост удалён') {
-          setCards(cards.filter(c => c._id !== card._id))
+          setCards((cards) => {
+            return cards.filter(c => c._id !== card._id)
+          })
         }
       })
       .catch((err) => console.log(err));
