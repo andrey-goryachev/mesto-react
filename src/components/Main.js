@@ -11,6 +11,20 @@ function Main({onEditProfile,
                 cards}) {
   const currenUser = useContext(CurrentUserContext)
 
+  const cardsElements = cards.map((card) => (
+    <li
+      className="elements__card"
+      key={card._id}
+    >
+      <Card
+        card={card}
+        onCardClick={onCardClick}
+        onCardLike={onCardLike}
+        onCardDelete={onCardDelete}
+      />
+    </li>
+  ))
+
   return (
     <main className="content">
       <section className="profile">
@@ -44,21 +58,7 @@ function Main({onEditProfile,
       </section>
       <section className="elements">
         <ul className="elements__list">
-          {
-            cards.map((card) => (
-              <li
-                className="elements__card"
-                key={card._id}
-              >
-                <Card
-                  card={card}
-                  onCardClick={onCardClick}
-                  onCardLike={onCardLike}
-                  onCardDelete={onCardDelete}
-                />
-              </li>
-            ))
-          }
+          {cardsElements}
         </ul>
       </section>
     </main>
